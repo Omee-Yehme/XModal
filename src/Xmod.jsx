@@ -5,9 +5,8 @@ import "./App.css"
 export default function Xmod() {
     const [click, setclick] = useState(false)
 
-    const hclick = () => {
-        setclick(true)
-    }
+    const hclick = () => setclick(true)
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,7 +26,7 @@ export default function Xmod() {
         }
 
         if (dob === "") {
-            alert("Invalid phone number. Please enter a 10-digit phone number."); // as per your weird requirement wording
+            alert("Invalid date of birth");
             return;
         }
 
@@ -39,22 +38,24 @@ export default function Xmod() {
 
     return (
 
-        <div className="modal">
+        <div>
             <h1>User Details Modal</h1>
             <button onClick={hclick}>Open Form</button>
+
             {click && (
-                <div className="modal-content">
-                    <form onSubmit={handleSubmit}>
-                        <h2>Fill Details</h2>
-                        Username: <input type="text" id="username" />
-                        Email Address: <input type="email" id="email" required />
-                        Phone Number: <input type="number" id="phone" required />
-                        Date of Birth: <input type="date" id="dob" required />
-                        <button className="submit-button">Submit</button>
-                    </form>
+                <div className="modal" onClick={() => setclick(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <form onSubmit={handleSubmit}>
+                            <h2>Fill Details</h2>
+                            Username: <input type="text" id="username" required />
+                            Email Address: <input type="email" id="email" required />
+                            Phone Number: <input type="number" id="phone" required />
+                            Date of Birth: <input type="date" id="dob" required />
+                            <button className="submit-button">Submit</button>
+                        </form>
+                    </div>
                 </div>
             )}
-
         </div>
     )
 }
